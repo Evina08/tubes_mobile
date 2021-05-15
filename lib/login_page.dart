@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 20),
             RichText(
                 text: TextSpan(
-                    text: 'Welcome to ',
+                    text: 'Welcome ',
                     style: TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20.0),
             SignInButton(Buttons.Google,
-                text: "Sign up with Google", onPressed: googleSignIn)
+                text: "Sign in with Google", onPressed: googleSignIn)
           ],
         ),
       ),
