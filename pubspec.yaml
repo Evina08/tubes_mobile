@@ -23,8 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^1.0.0 # new
-  google_sign_in: ^4.5.3
+  firebase_auth: ^0.18.4+1
+  flutter_signin_button: ^1.0.0
+  firebase_core: ^0.5.3
+  google_sign_in: ^4.5.9
 
 
 
@@ -48,7 +50,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #assets:
+  assets:
+    - images/start.jpg
    #- assets/google_logo.png
    #- assets/email_logo.png
   #   - images/a_dot_ham.jpeg
