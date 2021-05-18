@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'sign_up.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -60,6 +61,10 @@ class _LoginState extends State<Login> {
         });
   }
 
+  navigateToSignUp() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +87,7 @@ class _LoginState extends State<Login> {
                     Container(
                       child: TextFormField(
                           validator: (input) {
-                            if (input.isEmpty) return 'Masukkan Email';
+                            if (input.isEmpty) return 'Enter Email';
                           },
                           decoration: InputDecoration(
                               labelText: 'Email',
@@ -93,7 +98,7 @@ class _LoginState extends State<Login> {
                       child: TextFormField(
                           validator: (input) {
                             if (input.length < 6)
-                              return 'Password Minimal 6 Karakter';
+                              return 'Provide Minimum 6 Character';
                           },
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -120,6 +125,10 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
+            GestureDetector(
+              child: Text('Create an Account?'),
+              onTap: navigateToSignUp,
+            )
           ],
         ),
       ),

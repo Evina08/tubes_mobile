@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'sign_up.dart';
+import 'login.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -32,6 +34,14 @@ class _LoginPageState extends State<LoginPage> {
       }
     } else
       throw StateError('Sign in Aborted');
+  }
+
+  navigateToLogin() async {
+    Navigator.pushReplacementNamed(context, "Login");
+  }
+
+  navigateToRegister() async {
+    Navigator.pushReplacementNamed(context, "SignUp");
   }
 
   @override
@@ -75,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 RaisedButton(
                     padding: EdgeInsets.only(left: 30, right: 30),
-                    onPressed: null,
+                    onPressed: navigateToLogin,
                     child: Text(
                       'LOGIN',
                       style: TextStyle(
@@ -91,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(width: 20.0),
                 RaisedButton(
                     padding: EdgeInsets.only(left: 30, right: 30),
-                    onPressed: null,
+                    onPressed: navigateToRegister,
                     child: Text(
                       'REGISTER',
                       style: TextStyle(
