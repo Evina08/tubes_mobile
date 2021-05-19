@@ -2,6 +2,7 @@ import 'package:tubes_flutter/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tubes_flutter/home_page.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -70,7 +71,7 @@ class _MaindrawState extends State<MainDrawer> {
                       height: 5.0,
                     ),
                     Text(
-                      "${user.displayName} ",
+                      " ${user.displayName} ",
                       style: TextStyle(
                         fontSize: 22.0,
                         fontWeight: FontWeight.w800,
@@ -92,6 +93,15 @@ class _MaindrawState extends State<MainDrawer> {
       ),
       SizedBox(
         height: 20.0,
+      ),
+      ListTile(
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomePage())),
+        leading: Icon(
+          Icons.home,
+          color: Colors.black,
+        ),
+        title: Text("Home"),
       ),
       ListTile(
         onTap: () {},
