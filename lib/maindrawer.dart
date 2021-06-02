@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tubes_flutter/home_page.dart';
+import 'package:tubes_flutter/screens/anggota_page.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -104,7 +105,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Home"),
       ),
       ListTile(
-        onTap: () {},
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AnggotaPage())),
         leading: Icon(
           Icons.person,
           color: Colors.black,

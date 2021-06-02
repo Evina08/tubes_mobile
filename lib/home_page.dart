@@ -12,44 +12,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   SwiperController _swiperController;
   double prevOpacity = 1.0;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User user;
-  bool isloggedin = false;
-
-  checkAuthentification() async {
-    _auth.authStateChanges().listen((user) {
-      if (user == null) {
-        Navigator.of(context).pushReplacementNamed("start");
-      }
-    });
-  }
-
-  getUser() async {
-    User firebaseUser = _auth.currentUser;
-    await firebaseUser?.reload();
-    firebaseUser = _auth.currentUser;
-
-    if (firebaseUser != null) {
-      setState(() {
-        this.user = firebaseUser;
-        this.isloggedin = true;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.checkAuthentification();
-    this.getUser();
-  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> swiperItemsList = [
       buildSwiperItem(
-          "https://cdn0.iconfinder.com/data/icons/smileys-people-hand-gestures-add-on-vol-2/48/v-20-512.png",
-          "Hai Admin  ${user.displayName}, Selamat Bekerja! Swipe untuk melihat apa pekerjaanmu!",
+          "https://images.vexels.com/media/users/3/137291/isolated/preview/a97dc74de5e10e10383ab790d5c36927-hand-hello-gesture-fingers-icon-by-vexels.png",
+          "Hai Admin  , Selamat Bekerja! Swipe untuk melihat apa pekerjaanmu!",
           Color(0xFFfba457),
           firstGradient,
           "PERPUSTAKAAN "),
