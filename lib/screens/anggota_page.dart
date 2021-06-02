@@ -26,7 +26,7 @@ class _AnggotaPageState extends State<AnggotaPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.add,
+              Icons.add_to_photos_sharp,
               size: 30.0,
             ),
             onPressed: () {
