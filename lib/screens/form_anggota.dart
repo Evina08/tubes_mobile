@@ -70,7 +70,10 @@ class _FormAnggotaState extends State<FormAnggota> {
             TextField(
               controller: nikController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'NIK Anggota'),
+              decoration: InputDecoration(
+                labelText: 'NIK Anggota',
+                prefixIcon: Icon(Icons.description),
+              ),
               onChanged: (value) {
                 anggotaProvider.changeNik(value);
               },
@@ -78,7 +81,10 @@ class _FormAnggotaState extends State<FormAnggota> {
             TextField(
               controller: umurController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Umur Anggota'),
+              decoration: InputDecoration(
+                labelText: 'Umur Anggota',
+                prefixIcon: Icon(Icons.calendar_today),
+              ),
               onChanged: (value) {
                 anggotaProvider.changeUmur(value);
               },
@@ -86,7 +92,10 @@ class _FormAnggotaState extends State<FormAnggota> {
             TextField(
               controller: namaAnggotaController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Nama Anggota'),
+              decoration: InputDecoration(
+                labelText: 'Nama Anggota',
+                prefixIcon: Icon(Icons.assignment_ind_outlined),
+              ),
               onChanged: (value) {
                 anggotaProvider.changeNamaAnggota(value);
               },
@@ -94,30 +103,32 @@ class _FormAnggotaState extends State<FormAnggota> {
             TextField(
               controller: jenisMemberController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Jenis Member'),
+              decoration: InputDecoration(
+                labelText: 'Jenis Anggota',
+                prefixIcon: Icon(Icons.book),
+              ),
               onChanged: (value) => anggotaProvider.changeJenisMember(value),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              child: Text('Save'),
-              onPressed: () {
-                anggotaProvider.saveAnggota();
-                Navigator.of(context).pop();
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                onPressed: () {
+                  anggotaProvider.saveAnggota();
+                  Navigator.of(context).pop();
+                },
+                child: Center(child: Text('SAVE')),
+              ),
             ),
             (widget.anggota != null)
-                ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      onPrimary: Colors.white,
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        anggotaProvider.removeAnggota(widget.anggota.idAnggota);
+                        Navigator.of(context).pop();
+                      },
+                      child: Center(child: Text('DELETE')),
                     ),
-                    child: Text('Delete'),
-                    onPressed: () {
-                      anggotaProvider.removeAnggota(widget.anggota.idAnggota);
-                      Navigator.of(context).pop();
-                    },
                   )
                 : Container(),
           ],
