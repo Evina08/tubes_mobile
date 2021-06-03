@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tubes_flutter/sign_up.dart';
-import 'home_page.dart';
-import 'login.dart';
-import 'login_page.dart';
+import 'package:tubes_flutter/services/sign_up.dart';
+import 'screens/home_page.dart';
+import 'services/login.dart';
+import 'screens/login_page.dart';
 import 'package:provider/provider.dart';
 import 'services/firestore_service.dart';
 import 'package:tubes_flutter/providers/provider_anggota.dart';

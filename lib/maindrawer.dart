@@ -1,8 +1,8 @@
-import 'package:tubes_flutter/login_page.dart';
+import 'package:tubes_flutter/screens/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tubes_flutter/home_page.dart';
+import 'package:tubes_flutter/screens/home_page.dart';
 import 'package:tubes_flutter/screens/anggota_page.dart';
 
 class MainDrawer extends StatefulWidget {

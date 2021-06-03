@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'sign_up.dart';
-import 'login.dart';
+import '../services/sign_up.dart';
+import '../services/login.dart';
 
 class LoginPage extends StatefulWidget {
   @override
