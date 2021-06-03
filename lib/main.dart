@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:tubes_flutter/providers/provider_book.dart';
 import 'package:tubes_flutter/services/sign_up.dart';
 import 'screens/home_page.dart';
 import 'services/login.dart';
@@ -27,11 +28,12 @@ class MyApp extends StatelessWidget {
           create: (context) => firestoreService.getAnggota(),
           //  initialData: initialData,
         ),
-        // ChangeNotifierProvider(create: (context) => ProductProvider()),
-        // StreamProvider(
-        //   create: (context) => firestoreService.getProducts(),
-        //   //  initialData: initialData,
-        // ),
+        ChangeNotifierProvider(create: (context) => AnggotaProvider()),
+        StreamProvider(
+          create: (context) => firestoreService.getBook(),
+          //  initialData: initialData,
+        ),
+        ChangeNotifierProvider(create: (context) => BookProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(primaryColor: Colors.orange),

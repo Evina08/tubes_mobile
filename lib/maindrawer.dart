@@ -1,3 +1,4 @@
+import 'package:tubes_flutter/screens/book_page.dart';
 import 'package:tubes_flutter/screens/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,8 @@ class _MaindrawState extends State<MainDrawer> {
         title: Text("Data Anggota"),
       ),
       ListTile(
-        onTap: () {},
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => BookPage())),
         leading: Icon(
           Icons.book,
           color: Colors.black,
