@@ -70,6 +70,23 @@ class _FormAnggotaState extends State<FormAnggota> {
             Padding(
               padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
               child: TextField(
+                controller: namaAnggotaController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Nama Anggota',
+                  prefixIcon: Icon(Icons.assignment_ind_outlined),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  anggotaProvider.changeNamaAnggota(value);
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
+              child: TextField(
                 controller: nikController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -98,23 +115,6 @@ class _FormAnggotaState extends State<FormAnggota> {
                 ),
                 onChanged: (value) {
                   anggotaProvider.changeUmur(value);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
-              child: TextField(
-                controller: namaAnggotaController,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: 'Nama Anggota',
-                  prefixIcon: Icon(Icons.assignment_ind_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-                onChanged: (value) {
-                  anggotaProvider.changeNamaAnggota(value);
                 },
               ),
             ),
