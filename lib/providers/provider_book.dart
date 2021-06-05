@@ -49,6 +49,7 @@ class BookProvider with ChangeNotifier {
 
   //read
   loadValues(Book book) {
+    _idBuku = book.idBuku;
     _namaBuku = book.namaBuku;
     _kategori = book.kategori;
     _penerbit = book.penerbit;
@@ -71,11 +72,11 @@ class BookProvider with ChangeNotifier {
     } else {
       //Update
       var updatedBook = Book(
-          kategori: kategori,
-          namaBuku: namaBuku,
-          penerbit: penerbit,
-          penulis: penulis,
-          jumlahBuku: jumlahBuku,
+          kategori: _kategori,
+          namaBuku: _namaBuku,
+          penerbit: _penerbit,
+          penulis: _penulis,
+          jumlahBuku: _jumlahBuku,
           idBuku: _idBuku);
       firestoreService.saveBook(updatedBook);
     }

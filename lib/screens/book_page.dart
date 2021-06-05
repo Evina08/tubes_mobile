@@ -48,7 +48,7 @@ class _BookPageState extends State<BookPage> {
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.red,
-                      child: Icon(Icons.people),
+                      child: Icon(Icons.book_outlined),
                     ),
                     title: Text(book[index].namaBuku),
                     // trailing: Text(

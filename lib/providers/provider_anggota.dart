@@ -41,6 +41,7 @@ class AnggotaProvider with ChangeNotifier {
 
   //read
   loadValues(Anggota anggota) {
+    _idAnggota = anggota.idAnggota;
     _nik = anggota.nik;
     _umur = anggota.umur;
     _namaAnggota = anggota.namaAnggota;
@@ -61,10 +62,10 @@ class AnggotaProvider with ChangeNotifier {
     } else {
       //Update
       var updatedAnggota = Anggota(
-          nik: nik,
-          umur: umur,
-          namaAnggota: namaAnggota,
-          jenisMember: jenisMember,
+          nik: _nik,
+          umur: _umur,
+          namaAnggota: _namaAnggota,
+          jenisMember: _jenisMember,
           idAnggota: _idAnggota);
       firestoreService.saveAnggota(updatedAnggota);
     }
