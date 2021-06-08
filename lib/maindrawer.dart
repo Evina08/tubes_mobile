@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tubes_flutter/screens/home_page.dart';
 import 'package:tubes_flutter/screens/anggota_page.dart';
+import 'dart:io';
+import 'package:tubes_flutter/screens/profile_page.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class MainDrawer extends StatefulWidget {
 
 class _MaindrawState extends State<MainDrawer> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+   final ProfilePage profilePage = ProfilePage();
+  File _image;
   User user;
   bool isloggedin = false;
 
@@ -64,23 +68,26 @@ class _MaindrawState extends State<MainDrawer> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: NetworkImage(
-                        "https://www.mudracostumes.in/images/testimonial.jpg",
+                      radius: 100,
+                      backgroundColor: Color(00000),
+                      child: ClipOval(
+                        child: new SizedBox(
+                          width: 100.0,
+                          height: 100.0,
+                          child: (_image != null)
+                              ? Image.file(
+                                  _image,
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.network(
+                                  "https://www.mudracostumes.in/images/testimonial.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 5.0,
-                    ),
-                    Text(
-                      " ${user.displayName} ",
-                      style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5.0,
+                      height: 2.0,
                     ),
                     Text(
                       "Admin Perpustakaan",
