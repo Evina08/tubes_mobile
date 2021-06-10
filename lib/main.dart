@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
           create: (context) => firestoreService.getAnggota(),
           //  initialData: initialData,
         ),
-        ChangeNotifierProvider(create: (context) => AnggotaProvider()),
+        ChangeNotifierProvider(create: (context) => BookProvider()),
         StreamProvider(
           create: (context) => firestoreService.getBook(),
           //  initialData: initialData,
         ),
-        ChangeNotifierProvider(create: (context) => BookProvider()),
+        // ChangeNotifierProvider(create: (context) => BookProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(primaryColor: Colors.orange),

@@ -185,24 +185,24 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   RaisedButton(
-                    color: Color(0xff476cfb),
+                    color: Colors.orangeAccent,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                     elevation: 4.0,
-                    splashColor: Colors.blueGrey,
+                    splashColor: Colors.orangeAccent,
                     child: Text(
                       'Cancel',
                       style: TextStyle(color: Colors.white, fontSize: 16.0),
                     ),
                   ),
                   RaisedButton(
-                    color: Color(0xff476cfb),
+                    color: Colors.orangeAccent,
                     onPressed: () {
                       uploadPic(context);
                     },
                     elevation: 4.0,
-                    splashColor: Colors.blueGrey,
+                    splashColor: Colors.orangeAccent,
                     child: Text(
                       'Submit',
                       style: TextStyle(color: Colors.white, fontSize: 16.0),

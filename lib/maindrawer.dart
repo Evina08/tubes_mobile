@@ -7,6 +7,7 @@ import 'package:tubes_flutter/screens/home_page.dart';
 import 'package:tubes_flutter/screens/anggota_page.dart';
 import 'dart:io';
 import 'package:tubes_flutter/screens/profile_page.dart';
+import 'package:tubes_flutter/services/sign_in.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class MainDrawer extends StatefulWidget {
 
 class _MaindrawState extends State<MainDrawer> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-   final ProfilePage profilePage = ProfilePage();
+  final ProfilePage profilePage = ProfilePage();
   File _image;
   User user;
   bool isloggedin = false;
@@ -43,9 +44,7 @@ class _MaindrawState extends State<MainDrawer> {
 
   signOut() async {
     _auth.signOut();
-
-    final googleSignIn = GoogleSignIn();
-    await googleSignIn.signOut();
+    signOutGoogle();
   }
 
   @override
@@ -90,6 +89,16 @@ class _MaindrawState extends State<MainDrawer> {
                       height: 2.0,
                     ),
                     Text(
+                      " ${user.displayName} ",
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
                       "Admin Perpustakaan",
                       style: TextStyle(
                         fontSize: 16.0,
@@ -111,6 +120,15 @@ class _MaindrawState extends State<MainDrawer> {
           color: Colors.black,
         ),
         title: Text("Home"),
+      ),
+      ListTile(
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ProfilePage())),
+        leading: Icon(
+          Icons.settings,
+          color: Colors.black,
+        ),
+        title: Text("Profile"),
       ),
       ListTile(
         onTap: () => Navigator.of(context)

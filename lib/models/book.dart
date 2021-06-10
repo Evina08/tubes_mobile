@@ -5,6 +5,7 @@ class Book {
   final String penerbit;
   final String penulis;
   final int jumlahBuku;
+  final String createdBy;
 
   Book(
       {this.idBuku,
@@ -12,7 +13,8 @@ class Book {
       this.namaBuku,
       this.penerbit,
       this.penulis,
-      this.jumlahBuku});
+      this.jumlahBuku,
+      this.createdBy});
 
   Map<String, dynamic> toMap() {
     return {
@@ -21,7 +23,8 @@ class Book {
       'namaBuku': namaBuku,
       'penerbit': penerbit,
       'penulis': penulis,
-      'jumlahBuku': jumlahBuku
+      'jumlahBuku': jumlahBuku,
+      'createdBy': createdBy
     };
   }
 
@@ -31,5 +34,6 @@ class Book {
         namaBuku = firestore['namaBuku'],
         penerbit = firestore['penerbit'],
         penulis = firestore['penulis'],
-        jumlahBuku = firestore['jumlahBuku'];
+        jumlahBuku = firestore['jumlahBuku'],
+        createdBy = firestore['createdBy'];
 }

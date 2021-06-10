@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tubes_flutter/services/firestore_service.dart';
 import 'package:uuid/uuid.dart';
 import 'package:tubes_flutter/models/anggota.dart';
+import 'package:tubes_flutter/services/sign_in.dart';
 
 class AnggotaProvider with ChangeNotifier {
   final firestoreService = FirestoreService();
@@ -10,6 +11,7 @@ class AnggotaProvider with ChangeNotifier {
   int _nik;
   int _umur;
   String _jenisMember;
+  String _createdBy;
   var uuid = Uuid();
 
   //Getters
@@ -17,6 +19,7 @@ class AnggotaProvider with ChangeNotifier {
   int get umur => _umur;
   String get namaAnggota => _namaAnggota;
   String get jenisMember => _jenisMember;
+  String get createdBy => _createdBy;
 
   //Setters
   changeNik(String value) {
@@ -39,6 +42,11 @@ class AnggotaProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  changeCreatedBy(String value) {
+    _createdBy = UsersId;
+    notifyListeners();
+  }
+
   //read
   loadValues(Anggota anggota) {
     _idAnggota = anggota.idAnggota;
@@ -46,6 +54,7 @@ class AnggotaProvider with ChangeNotifier {
     _umur = anggota.umur;
     _namaAnggota = anggota.namaAnggota;
     _jenisMember = anggota.jenisMember;
+    _createdBy = anggota.createdBy;
   }
 
 //create/update
@@ -57,6 +66,7 @@ class AnggotaProvider with ChangeNotifier {
           umur: umur,
           namaAnggota: namaAnggota,
           jenisMember: jenisMember,
+          createdBy: UsersId,
           idAnggota: uuid.v4());
       firestoreService.saveAnggota(newAnggota);
     } else {
@@ -66,6 +76,7 @@ class AnggotaProvider with ChangeNotifier {
           umur: _umur,
           namaAnggota: _namaAnggota,
           jenisMember: _jenisMember,
+          createdBy: _createdBy,
           idAnggota: _idAnggota);
       firestoreService.saveAnggota(updatedAnggota);
     }
