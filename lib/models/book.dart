@@ -7,14 +7,15 @@ class Book {
   final int jumlahBuku;
   final String createdBy;
 
-  Book(
-      {this.idBuku,
-      this.kategori,
-      this.namaBuku,
-      this.penerbit,
-      this.penulis,
-      this.jumlahBuku,
-      this.createdBy});
+  Book({
+    this.idBuku,
+    this.kategori,
+    this.namaBuku,
+    this.penerbit,
+    this.penulis,
+    this.jumlahBuku,
+    this.createdBy,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -24,7 +25,7 @@ class Book {
       'penerbit': penerbit,
       'penulis': penulis,
       'jumlahBuku': jumlahBuku,
-      'createdBy': createdBy
+      'createdBy': createdBy,
     };
   }
 

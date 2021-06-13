@@ -4,21 +4,17 @@ import 'package:tubes_flutter/models/book.dart';
 import 'package:tubes_flutter/services/sign_in.dart';
 
 class FirestoreService {
-  FirebaseFirestore _db = FirebaseFirestore.instance;
+  CollectionReference _dbbook = FirebaseFirestore.instance.collection('book');
 
   //anggota
   Future<void> saveAnggota(Anggota anggota) {
-    return _db
-        .collection('anggota')
-        .doc(anggota.idAnggota)
-        .set(anggota.toMap());
+    return _dbbook.doc(anggota.idAnggota).set(anggota.toMap());
   }
 
   Stream<List<Anggota>> getAnggota() {
-    return _db
-        .collection('anggota')
-        .where('createdBy', isEqualTo: UsersId)
-        .orderBy('nik')
+    return _dbbook
+        .where('createdBy', isEqualTo: uid)
+        .orderBy('idAnggota')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => Anggota.fromFirestore(document.data()))
@@ -26,19 +22,18 @@ class FirestoreService {
   }
 
   Future<void> removeAnggota(String idAnggota) {
-    return _db.collection('anggota').doc(idAnggota).delete();
+    return _dbbook.doc(idAnggota).delete();
   }
 
   //book
   Future<void> saveBook(Book book) {
-    return _db.collection('book').doc(book.idBuku).set(book.toMap());
+    return _dbbook.doc(book.idBuku).set(book.toMap());
   }
 
   Stream<List<Book>> getBook() {
-    return _db
-        .collection('book')
-        .where('createdBy', isEqualTo: UsersId)
-        .orderBy('jumlahBuku')
+    return _dbbook
+        .where('createdBy', isEqualTo: uid)
+        //.orderBy('idBuku')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => Book.fromFirestore(document.data()))
@@ -46,6 +41,6 @@ class FirestoreService {
   }
 
   Future<void> removeBook(String idBuku) {
-    return _db.collection('book').doc(idBuku).delete();
+    return _dbbook.doc(idBuku).delete();
   }
 }

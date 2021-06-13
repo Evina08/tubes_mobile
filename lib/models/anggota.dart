@@ -6,13 +6,14 @@ class Anggota {
   final String jenisMember;
   final String createdBy;
 
-  Anggota(
-      {this.idAnggota,
-      this.namaAnggota,
-      this.umur,
-      this.nik,
-      this.jenisMember,
-      this.createdBy});
+  Anggota({
+    this.idAnggota,
+    this.namaAnggota,
+    this.umur,
+    this.nik,
+    this.jenisMember,
+    this.createdBy,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -21,7 +22,7 @@ class Anggota {
       'umur': umur,
       'nik': nik,
       'jenisMember': jenisMember,
-      'createdBy': createdBy
+      'createdBy': createdBy,
     };
   }
 

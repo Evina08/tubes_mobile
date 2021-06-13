@@ -49,8 +49,8 @@ class BookProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  changeCreatedBy(String value) {
-    _createdBy = UsersId;
+  changeCreatedBy() {
+    _createdBy = uid;
     notifyListeners();
   }
 
@@ -75,7 +75,7 @@ class BookProvider with ChangeNotifier {
           penerbit: penerbit,
           penulis: penulis,
           jumlahBuku: jumlahBuku,
-          createdBy: UsersId,
+          createdBy: uid,
           idBuku: uuid.v4());
       firestoreService.saveBook(newBook);
     } else {

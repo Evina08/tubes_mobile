@@ -42,8 +42,8 @@ class AnggotaProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  changeCreatedBy(String value) {
-    _createdBy = UsersId;
+  changeCreatedBy() {
+    _createdBy = uid;
     notifyListeners();
   }
 
@@ -54,7 +54,6 @@ class AnggotaProvider with ChangeNotifier {
     _umur = anggota.umur;
     _namaAnggota = anggota.namaAnggota;
     _jenisMember = anggota.jenisMember;
-    _createdBy = anggota.createdBy;
   }
 
 //create/update
@@ -66,7 +65,7 @@ class AnggotaProvider with ChangeNotifier {
           umur: umur,
           namaAnggota: namaAnggota,
           jenisMember: jenisMember,
-          createdBy: UsersId,
+          createdBy: uid,
           idAnggota: uuid.v4());
       firestoreService.saveAnggota(newAnggota);
     } else {
