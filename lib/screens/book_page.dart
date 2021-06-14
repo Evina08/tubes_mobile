@@ -72,7 +72,7 @@ class _BookPageState extends State<BookPage> {
                             trailing: GestureDetector(
                               child: Icon(Icons.delete_sweep_rounded),
                               onTap: () {
-                                bookProvider.removeBook(widget.book.idBuku);
+                                bookProvider.removeBook(data.id);
                                 Navigator.of(context).pop();
                               },
                             ),

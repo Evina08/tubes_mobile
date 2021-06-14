@@ -27,6 +27,7 @@ class _FormBookState extends State<FormBook> {
   TextEditingController penerbitController = TextEditingController();
   TextEditingController penulisController = TextEditingController();
   TextEditingController jumlahBukuController = TextEditingController();
+  String check;
   @override
   void dispose() {
     kategoriController.dispose();
@@ -39,17 +40,22 @@ class _FormBookState extends State<FormBook> {
 
   _FormBookState(String id, String kategori, String namaBuku, String penerbit,
       String penulis, int jumlah) {
-    idController.text = id;
-    kategoriController.text = kategori;
-    namaBukuController.text = namaBuku;
-    penerbitController.text = penerbit;
-    penulisController.text = penulis;
-    jumlahBukuController.text = jumlah.toString();
+    if (kategori != null) {
+      idController.text = id;
+      kategoriController.text = kategori;
+      namaBukuController.text = namaBuku;
+      penerbitController.text = penerbit;
+      penulisController.text = penulis;
+      jumlahBukuController.text = jumlah.toString();
+      check = "ada";
+    } else {
+      check = "kosong";
+    }
   }
 
   @override
   void initState() {
-    if (idController.text == null) {
+    if (check == "kosong") {
       //New Record
       kategoriController.text = "";
       namaBukuController.text = "";
@@ -62,12 +68,12 @@ class _FormBookState extends State<FormBook> {
       // });
     } else {
       //Controller Update
-      kategoriController.text = widget.book.kategori.toString();
-      namaBukuController.text = widget.book.namaBuku.toString();
-      penerbitController.text = widget.book.penerbit.toString();
-      penulisController.text = widget.book.penulis.toString();
-      jumlahBukuController.text = widget.book.jumlahBuku.toString();
-      //State Update
+      // kategoriController.text = widget.book.kategori.toString();
+      // namaBukuController.text = widget.book.namaBuku.toString();
+      // penerbitController.text = widget.book.penerbit.toString();
+      // penulisController.text = widget.book.penulis.toString();
+      // jumlahBukuController.text = widget.book.jumlahBuku.toString();
+      // //State Update
       new Future.delayed(Duration.zero, () {
         final bookProvider = Provider.of<BookProvider>(context, listen: false);
         bookProvider.loadValues(
@@ -178,7 +184,7 @@ class _FormBookState extends State<FormBook> {
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).primaryColorLight,
                 onPressed: () {
-                  bookProvider.saveBook();
+                  bookProvider.saveBook(check);
                   Navigator.of(context).pop();
                 },
                 child: Center(child: Text('SAVE')),

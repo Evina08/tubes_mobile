@@ -67,9 +67,9 @@ class BookProvider with ChangeNotifier {
   }
 
 //create/update
-  saveBook() {
+  saveBook(String ada) {
     print(_idBuku);
-    if (_idBuku == null) {
+    if (ada == "kosong") {
       var newBook = Book(
           kategori: kategori,
           namaBuku: namaBuku,
@@ -87,7 +87,7 @@ class BookProvider with ChangeNotifier {
           penerbit: _penerbit,
           penulis: _penulis,
           jumlahBuku: _jumlahBuku,
-          createdBy: _createdBy,
+          createdBy: uid,
           idBuku: _idBuku);
       firestoreService.saveBook(updatedBook);
     }
