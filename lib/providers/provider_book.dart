@@ -55,14 +55,15 @@ class BookProvider with ChangeNotifier {
   }
 
   //read
-  loadValues(Book book) {
-    _idBuku = book.idBuku;
-    _namaBuku = book.namaBuku;
-    _kategori = book.kategori;
-    _penerbit = book.penerbit;
-    _penulis = book.penulis;
-    _jumlahBuku = book.jumlahBuku;
-    _createdBy = book.createdBy;
+  loadValues(String id, String kategori, String namaBuku, String penerbit,
+      String penulis, int jumlah) {
+    _idBuku = id;
+    _namaBuku = kategori;
+    _kategori = namaBuku;
+    _penerbit = penerbit;
+    _penulis = penulis;
+    _jumlahBuku = jumlah;
+    // _createdBy = book.createdBy;
   }
 
 //create/update

@@ -54,6 +54,7 @@ class AnggotaProvider with ChangeNotifier {
     _umur = anggota.umur;
     _namaAnggota = anggota.namaAnggota;
     _jenisMember = anggota.jenisMember;
+    _createdBy = anggota.createdBy;
   }
 
 //create/update

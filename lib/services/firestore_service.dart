@@ -5,16 +5,17 @@ import 'package:tubes_flutter/services/sign_in.dart';
 
 class FirestoreService {
   CollectionReference _dbbook = FirebaseFirestore.instance.collection('book');
-
+  CollectionReference _dbanggota =
+      FirebaseFirestore.instance.collection('anggota');
   //anggota
   Future<void> saveAnggota(Anggota anggota) {
-    return _dbbook.doc(anggota.idAnggota).set(anggota.toMap());
+    return _dbanggota.doc(anggota.idAnggota).set(anggota.toMap());
   }
 
   Stream<List<Anggota>> getAnggota() {
-    return _dbbook
+    return _dbanggota
         .where('createdBy', isEqualTo: uid)
-        .orderBy('idAnggota')
+        //.orderBy('idAnggota')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => Anggota.fromFirestore(document.data()))
@@ -22,7 +23,7 @@ class FirestoreService {
   }
 
   Future<void> removeAnggota(String idAnggota) {
-    return _dbbook.doc(idAnggota).delete();
+    return _dbanggota.doc(idAnggota).delete();
   }
 
   //book

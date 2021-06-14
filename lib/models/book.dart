@@ -1,11 +1,11 @@
 class Book {
-  final String idBuku;
-  final String kategori;
-  final String namaBuku;
-  final String penerbit;
-  final String penulis;
-  final int jumlahBuku;
-  final String createdBy;
+  String idBuku;
+  String kategori;
+  String namaBuku;
+  String penerbit;
+  String penulis;
+  int jumlahBuku;
+  String createdBy;
 
   Book({
     this.idBuku,

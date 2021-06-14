@@ -4,20 +4,29 @@ import 'package:provider/provider.dart';
 import 'package:tubes_flutter/providers/provider_book.dart';
 
 class FormBook extends StatefulWidget {
-  final Book book;
+  Book book;
+  final String id;
+  final String kategori;
+  final String namaBuku;
+  final String penerbit;
+  final String penulis;
+  final int jumlah;
 
-  FormBook([this.book]);
+  FormBook(this.id, this.kategori, this.namaBuku, this.penerbit, this.penulis,
+      this.jumlah);
 
   @override
-  _FormBookState createState() => _FormBookState();
+  _FormBookState createState() => _FormBookState(this.id, this.kategori,
+      this.namaBuku, this.penerbit, this.penulis, this.jumlah);
 }
 
 class _FormBookState extends State<FormBook> {
-  final kategoriController = TextEditingController();
-  final namaBukuController = TextEditingController();
-  final penerbitController = TextEditingController();
-  final penulisController = TextEditingController();
-  final jumlahBukuController = TextEditingController();
+  TextEditingController idController = TextEditingController();
+  TextEditingController kategoriController = TextEditingController();
+  TextEditingController namaBukuController = TextEditingController();
+  TextEditingController penerbitController = TextEditingController();
+  TextEditingController penulisController = TextEditingController();
+  TextEditingController jumlahBukuController = TextEditingController();
   @override
   void dispose() {
     kategoriController.dispose();
@@ -28,19 +37,29 @@ class _FormBookState extends State<FormBook> {
     super.dispose();
   }
 
+  _FormBookState(String id, String kategori, String namaBuku, String penerbit,
+      String penulis, int jumlah) {
+    idController.text = id;
+    kategoriController.text = kategori;
+    namaBukuController.text = namaBuku;
+    penerbitController.text = penerbit;
+    penulisController.text = penulis;
+    jumlahBukuController.text = jumlah.toString();
+  }
+
   @override
   void initState() {
-    if (widget.book == null) {
+    if (idController.text == null) {
       //New Record
       kategoriController.text = "";
       namaBukuController.text = "";
       penerbitController.text = "";
       penulisController.text = "";
       jumlahBukuController.text = "";
-      new Future.delayed(Duration.zero, () {
-        final bookProvider = Provider.of<BookProvider>(context, listen: false);
-        bookProvider.loadValues(Book());
-      });
+      // new Future.delayed(Duration.zero, () {
+      //   final bookProvider = Provider.of<BookProvider>(context, listen: false);
+      //   bookProvider.loadValues(Book());
+      // });
     } else {
       //Controller Update
       kategoriController.text = widget.book.kategori.toString();
@@ -51,7 +70,13 @@ class _FormBookState extends State<FormBook> {
       //State Update
       new Future.delayed(Duration.zero, () {
         final bookProvider = Provider.of<BookProvider>(context, listen: false);
-        bookProvider.loadValues(widget.book);
+        bookProvider.loadValues(
+            idController.text,
+            kategoriController.text,
+            namaBukuController.text,
+            penerbitController.text,
+            penulisController.text,
+            int.parse(jumlahBukuController.text));
       });
     }
 
