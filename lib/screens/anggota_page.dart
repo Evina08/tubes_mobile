@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tubes_flutter/screens/form_anggota.dart';
 import 'package:provider/provider.dart';
 import 'package:tubes_flutter/models/anggota.dart';
 import 'package:tubes_flutter/providers/provider_anggota.dart';
 import 'package:tubes_flutter/models/anggota.dart';
+import 'package:tubes_flutter/services/sign_in.dart';
 
 class AnggotaPage extends StatefulWidget {
   final Anggota anggota;
@@ -32,56 +34,67 @@ class _AnggotaPageState extends State<AnggotaPage> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => FormAnggota(),
+                  builder: (context) =>
+                      FormAnggota(null, null, null, null, null),
                 ),
               );
             },
           )
         ],
       ),
-      body: (anggota != null)
-          ? ListView.builder(
-              itemCount: anggota.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.white,
-                  elevation: 2.0,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      child: Icon(Icons.people),
-                    ),
-                    title: Text(anggota[index].namaAnggota),
-                    // trailing: Text(
-                    //   anggota[index].jenisMember,
-                    // ),
-                    subtitle: Text("Jenis Member: " +
-                        anggota[index].jenisMember +
-                        "  Umur: " +
-                        anggota[index].umur.toString()),
-                    trailing: GestureDetector(
-                      child: Icon(Icons.delete_sweep_rounded),
-                      onTap: () {
-                        anggotaProvider.removeAnggota(widget.anggota.idAnggota);
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => FormAnggota(
-                            anggota[index],
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('anggota')
+              .where('createdBy', isEqualTo: uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            return !snapshot.hasData
+                ? Text('PLease Wait')
+                : ListView.builder(
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot data = snapshot.data.docs[index];
+                      return Card(
+                        color: Colors.white,
+                        elevation: 2.0,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.red,
+                            child: Icon(Icons.people),
                           ),
+                          title: Text(data['namaAnggota']),
+                          // trailing: Text(
+                          //   anggota[index].jenisMember,
+                          // ),
+                          subtitle: Text("Jenis Member: " +
+                              data['jenisMember'] +
+                              "  Umur: " +
+                              data['umur'].toString()),
+                          trailing: GestureDetector(
+                            child: Icon(Icons.delete_sweep_rounded),
+                            onTap: () {
+                              anggotaProvider.removeAnggota(data.id);
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => FormAnggota(
+                                  data.id.toString(),
+                                  data['namaAnggota'].toString(),
+                                  data['jenisMember'].toString(),
+                                  data['nik'],
+                                  data['umur'],
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       );
                     },
-                  ),
-                );
-              },
-            )
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+                  );
+          }),
     );
   }
 }

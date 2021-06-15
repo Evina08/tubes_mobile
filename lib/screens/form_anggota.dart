@@ -4,20 +4,27 @@ import 'package:provider/provider.dart';
 import 'package:tubes_flutter/providers/provider_anggota.dart';
 
 class FormAnggota extends StatefulWidget {
-  final Anggota anggota;
+  Anggota anggota;
+  final String idAnggota;
+  final String namaAnggota;
+  final String jenisMember;
+  final int nik;
+  final int umur;
 
-  FormAnggota([this.anggota]);
-
+  FormAnggota(
+      this.idAnggota, this.namaAnggota, this.jenisMember, this.nik, this.umur);
   @override
-  _FormAnggotaState createState() => _FormAnggotaState();
+  _FormAnggotaState createState() => _FormAnggotaState(
+      this.idAnggota, this.namaAnggota, this.jenisMember, this.nik, this.umur);
 }
 
 class _FormAnggotaState extends State<FormAnggota> {
-  final nikController = TextEditingController();
-  final umurController = TextEditingController();
-  final namaAnggotaController = TextEditingController();
-  final jenisMemberController = TextEditingController();
-
+  TextEditingController idAnggotaController = TextEditingController();
+  TextEditingController nikController = TextEditingController();
+  TextEditingController umurController = TextEditingController();
+  TextEditingController namaAnggotaController = TextEditingController();
+  TextEditingController jenisMemberController = TextEditingController();
+  String check;
   @override
   void dispose() {
     nikController.dispose();
@@ -27,30 +34,48 @@ class _FormAnggotaState extends State<FormAnggota> {
     super.dispose();
   }
 
+  _FormAnggotaState(String idAnggota, String namaAnggota, String jenisMember,
+      int nik, int umur) {
+    if (jenisMember != null) {
+      idAnggotaController.text = idAnggota;
+      nikController.text = nik.toString();
+      umurController.text = umur.toString();
+      namaAnggotaController.text = namaAnggota;
+      jenisMemberController.text = jenisMember;
+      check = "ada";
+    } else {
+      check = "kosong";
+    }
+  }
   @override
   void initState() {
-    if (widget.anggota == null) {
+    if (check == "kosong") {
       //New Record
       nikController.text = "";
       umurController.text = "";
       namaAnggotaController.text = "";
       jenisMemberController.text = "";
-      new Future.delayed(Duration.zero, () {
-        final anggotaProvider =
-            Provider.of<AnggotaProvider>(context, listen: false);
-        anggotaProvider.loadValues(Anggota());
-      });
+      // new Future.delayed(Duration.zero, () {
+      //   final anggotaProvider =
+      //       Provider.of<AnggotaProvider>(context, listen: false);
+      //   anggotaProvider.loadValues(Anggota());
+      // });
     } else {
       //Controller Update
-      nikController.text = widget.anggota.nik.toString();
-      umurController.text = widget.anggota.umur.toString();
-      namaAnggotaController.text = widget.anggota.namaAnggota.toString();
-      jenisMemberController.text = widget.anggota.jenisMember.toString();
+      // nikController.text = widget.anggota.nik.toString();
+      // umurController.text = widget.anggota.umur.toString();
+      // namaAnggotaController.text = widget.anggota.namaAnggota.toString();
+      // jenisMemberController.text = widget.anggota.jenisMember.toString();
       //State Update
       new Future.delayed(Duration.zero, () {
         final anggotaProvider =
             Provider.of<AnggotaProvider>(context, listen: false);
-        anggotaProvider.loadValues(widget.anggota);
+        anggotaProvider.loadValues(
+            idAnggotaController.text,
+            namaAnggotaController.text,
+            jenisMemberController.text,
+            int.parse(nikController.text),
+            int.parse(umurController.text));
       });
     }
 
@@ -96,9 +121,7 @@ class _FormAnggotaState extends State<FormAnggota> {
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
-                onChanged: (value) {
-                  anggotaProvider.changeNik(value);
-                },
+                onChanged: (value) => anggotaProvider.changeNik(value),
               ),
             ),
             Padding(
@@ -113,9 +136,7 @@ class _FormAnggotaState extends State<FormAnggota> {
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                 ),
-                onChanged: (value) {
-                  anggotaProvider.changeUmur(value);
-                },
+                onChanged: (value) => anggotaProvider.changeUmur(value),
               ),
             ),
             Padding(
@@ -139,7 +160,7 @@ class _FormAnggotaState extends State<FormAnggota> {
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).primaryColorLight,
                 onPressed: () {
-                  anggotaProvider.saveAnggota();
+                  anggotaProvider.saveAnggota(check);
                   Navigator.of(context).pop();
                 },
                 child: Center(child: Text('SAVE')),

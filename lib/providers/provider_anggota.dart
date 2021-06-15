@@ -48,19 +48,20 @@ class AnggotaProvider with ChangeNotifier {
   }
 
   //read
-  loadValues(Anggota anggota) {
-    _idAnggota = anggota.idAnggota;
-    _nik = anggota.nik;
-    _umur = anggota.umur;
-    _namaAnggota = anggota.namaAnggota;
-    _jenisMember = anggota.jenisMember;
-    _createdBy = anggota.createdBy;
+  loadValues(String idAnggota, String namaAnggota, String jenisMember, int nik,
+      int umur) {
+    _idAnggota = idAnggota;
+    _nik = nik;
+    _umur = umur;
+    _namaAnggota = namaAnggota;
+    _jenisMember = jenisMember;
+    // _createdBy = anggota.createdBy;
   }
 
 //create/update
-  saveAnggota() {
+  saveAnggota(String ada) {
     print(_idAnggota);
-    if (_idAnggota == null) {
+    if (ada == "kosong") {
       var newAnggota = Anggota(
           nik: nik,
           umur: umur,
@@ -76,7 +77,7 @@ class AnggotaProvider with ChangeNotifier {
           umur: _umur,
           namaAnggota: _namaAnggota,
           jenisMember: _jenisMember,
-          createdBy: _createdBy,
+          createdBy: uid,
           idAnggota: _idAnggota);
       firestoreService.saveAnggota(updatedAnggota);
     }
