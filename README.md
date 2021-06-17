@@ -4,4 +4,4 @@
 - NIM : 1931710072
 
 - Result
--  ![gambar 1](vid/vid.mp4)
+-  ![video](vid/vid.mp4)
