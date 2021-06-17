@@ -15,7 +15,6 @@ class FirestoreService {
   Stream<List<Anggota>> getAnggota() {
     return _dbanggota
         .where('createdBy', isEqualTo: uid)
-        //.orderBy('idAnggota')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => Anggota.fromFirestore(document.data()))
@@ -24,7 +23,7 @@ class FirestoreService {
 
   Future<void> removeAnggota(String idAnggota) {
     return _dbanggota.doc(idAnggota).delete();
-  }
+  }  
 
   //book
   Future<void> saveBook(Book book) {
@@ -34,7 +33,6 @@ class FirestoreService {
   Stream<List<Book>> getBook() {
     return _dbbook
         .where('createdBy', isEqualTo: uid)
-        //.orderBy('idBuku')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((document) => Book.fromFirestore(document.data()))
